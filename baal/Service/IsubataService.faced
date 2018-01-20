@@ -1,0 +1,78 @@
+namespace Data.Request
+{
+	entity IsubataMessagePostRequest 
+	{
+		/#
+		作成したRoomID
+		@range 1,
+		#/
+		ChannelID: !long;
+
+		/#
+		送信するメッセージ
+		@length 1,100
+		#/
+		Message: !string;
+	}
+
+	entity IsubataMessagesRequest 
+	{
+		/#
+		作成したRoomID
+		@range 1,
+		#/
+		ChannelID: !long;
+
+		/#
+		取得済みのMessageID
+		@range 0,
+		#/
+		LastMessageID: ?long;
+	}
+}
+
+namespace Data.Response
+{
+	entity IsubataMessagePostResponse
+	{
+		/#
+		MessageID
+		@range 1,
+		#/
+		MessageID: !long;
+	}
+
+	entity IsubataMessagesResponse
+	{
+		/#
+		メッセージ一覧
+		#/
+		Messages: !list of Data.IsubataMessageData;
+	}
+}
+
+namespace Service
+{
+	service IsubataService
+	{
+		/#
+		メッセージ送信
+		@path /api/isubata/message_post
+		@post
+		@session
+		#/
+		MessagePost:
+			<= !Data.Request.IsubataMessagePostRequest
+			=> !Data.Response.IsubataMessagePostResponse;
+
+		/#
+		メッセージ取得
+		@path /api/isubata/messages
+		@session
+		#/
+		Messages:
+			<= !Data.Request.IsubataMessagesRequest
+			=> !Data.Response.IsubataMessagesResponse;
+	}
+}
+

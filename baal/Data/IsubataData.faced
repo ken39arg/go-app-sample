@@ -1,0 +1,49 @@
+namespace Data
+{
+	/#
+	ユーザー
+	#/
+	entity IsubataUserData
+	{
+		/#
+		名前
+		@length 1,20
+		#/
+		Name: !string;
+
+		/#
+		表示名
+		@length 1,15
+		#/
+		DisplayName: !string;
+
+		/#
+		アイコンURL
+		@length 8,100
+		#/
+		AvatarIcon: !string;
+	}
+	
+	/#
+	メッセージ
+	#/
+	entity IsubataMessageData
+	+= Data.IdentifiableLong
+	{
+		/#
+		ユーザー
+		#/
+		User: !Data.IsubataUserData;
+
+		/#
+		メッセージ本文
+		@length 1,100
+		#/
+		Content: !string;
+
+		/#
+		送信時間
+		#/
+		Date: !timestamp;
+	}
+}
