@@ -19,6 +19,9 @@ goでwebアプリケーションを開発するときにBaalというドキュ�
 DSLとしてSQLでいいじゃん派でORMごとにオレオレDSLを覚えたくないので、SQLからコードを生成しています。
 
 sqlをもとに `app/database/table/*.auto.go` と `app/database/row/*.auto.go` を生成しています。
+
+ジェネレータは[schemalex](https://github.com/schemalex/schemalex)を使って解析し、text/template などで生成し x/tools/imports でフォーマットしています
+
 このサンプルではありませんが、tableがmasterdataである場合はユニークインデックスをキーにしたキャッシュコードも自動生成しています。
 
 ## 開発手順
